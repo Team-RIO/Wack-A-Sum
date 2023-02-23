@@ -1,1 +1,1 @@
-# Wack-A-Sum
+# Whack-Sum
