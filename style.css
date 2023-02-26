@@ -1,14 +1,32 @@
 body {
     background-image: url("./Media/Background.png");
     background-size: 100%;
-    /* border-radius: 15px; */
     margin: 0px;
     padding: 0%;
     aspect-ratio: 16/9;
     display:flex;
+    justify-content: center;
 } 
+
+h1{
+    width:100%;
+}
+
+#title{
+    width: auto;
+    height: 5%;
+    background-color:rgba(0, 0, 0, 0.48);
+    /* display: flex; */
+    justify-content: center;
+    border: 10px rgba(0, 0, 0, 0.48) solid;
+    border-radius: 10px ;
+    padding: 10px;
+}
 
 #playArea {
     color: red;
     /* backface-visibility: hidden; */
+}
+img {
+    width:100px;
 }
