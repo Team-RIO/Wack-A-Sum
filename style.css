@@ -1,0 +1,14 @@
+body {
+    background-image: url("./Media/Background.png");
+    background-size: 100%;
+    /* border-radius: 15px; */
+    margin: 0px;
+    padding: 0%;
+    aspect-ratio: 16/9;
+    display:flex;
+} 
+
+#playArea {
+    color: red;
+    /* backface-visibility: hidden; */
+}
