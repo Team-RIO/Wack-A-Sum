@@ -2,14 +2,15 @@
 Feel free to rename or alter anything as needed, I know there's some things missing (i.e. querySelectors)
  */
 
-// Arrays for safe and hazardous items 
-
-const safe = []; // contains IDs that will increment score to hit 
-
-const hazard = []; // contains IDs that will decrement lives when hit
-
-// const special = [];      => Not sure if there should be a new array for events like "poop", "imposter", "steveHarvey", etc. 
-// If so, this will contain IDs that may require something else to be done (i.e. "poop" will have a screen overlay, not clicking "imposter" will cause a life to be lost, etc.)
+// All possible items that will pop out of holes
+// Default: Level 1
+const items = [
+    {id: 'mole', chance: 1},
+    {id: 'bomb', chance: 0},
+    {id: 'steve', chance: 0},
+    {id: 'poop', chance: 0.}, 
+    {id: 'imposter', chance: 0},
+];
 
 
 // Variables that update as the game progresses
