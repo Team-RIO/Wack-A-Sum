@@ -38,9 +38,29 @@ function gameStart() {
 // Event listener needed for 'click' => effect changes based on the element (hazard or safe)
 // This function should contain conditions for how the item clicked affects lives/score updates
 function whackItems() {
+    const gameGrid = document.getElementById('game-area')
+    const items = [
+        { name: 'bomb', class: 'hazard' },
+        { name: 'mole', class: 'safe' },
+        { name: 'diamond', class: 'safe' },
+        { name: 'rock', class: 'hazard' }
+    ];
 
-}
+    let score = 0;
+    let lives = 3;
 
+    function updateGame(event){
+        const clickedItem = event.target;
+        const itemClass = clickedItem.classList[0];
+
+        if(itemClass === 'hazard'){
+            lives--;
+        }else if(itemClass === 'safe'){
+            score++;
+        }
+        gameGrid.removeChild(clickedItem)
+};
+};
 
 // Game over screen
 // Restart game     => Event listener awaits 'click' on mole ID. When clicked, the player is returned to the game area and a new game begins 
