@@ -1,12 +1,14 @@
 body {
     background-image: url("./Media/Background.png");
     background-size: 100%;
+    background-position: bottom;
     margin: 0px;
     padding: 0%;
-    aspect-ratio: 16/9;
+    /* aspect-ratio: 16/9; */
     display:flex;
     align-items: center;
     flex-direction: column;
+    height: 100vh;
 } 
 
 /* h1{
@@ -26,15 +28,37 @@ body {
 
 main{
     width: 90%;
-
+    height: 75%;
+    /* background-color: rgba(255, 0, 0, 0.192); */
 }
 
 #startPage {
-    background-color: rgba(255, 0, 0, 0.192);
-    height: 100px;
-    width: ;
-    /* backface-visibility: hidden; */
+    display: flex;
+    flex-direction: column;
+    justify-content:space-between;
+    align-items: center;
+    height: 100%;
+    margin-top: auto;
 }
+
+#intro{
+    margin-top: auto;
+    scale: 1.5;
+}
+
+#titleImg {
+    /* background-color: rgba(43, 255, 0, 0.432); */
+    display:flex;
+    align-items: center;
+    justify-content:space-between;
+    width: 90%;
+}
+
 img {
-    width:100px;
+    width:300px; 
+}
+
+#startMole{
+    margin-top: auto;
+    width: 350px;
 }
