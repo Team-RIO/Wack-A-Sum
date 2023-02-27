@@ -25,6 +25,9 @@ let score = 0; // keep track of score
 // Functions 
 
 // Start screen  
+
+
+
 // Event listener awaits 'click' on mole ID. When clicked, the page is swapped to the game area 
 function gameStart() {
     // code
@@ -55,4 +58,3 @@ function restart() {
 
 
 
-    
