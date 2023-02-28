@@ -9,6 +9,11 @@ const hole = document.getElementsByClassName('hole')
 const startMole = document.querySelector('#startMole')
 const title = document.getElementById("title")
 const gameOverScreen = document.getElementById("gameOverScreen")
+const livesStat = document.getElementById("lives")
+
+///////////////////////////////////////////////////////////////////////////
+
+    // Hole Declarations
 
 let A1 = document.getElementById('A1')
 let A2 = document.getElementById('A2')
@@ -24,6 +29,9 @@ let C1 = document.getElementById('C1')
 let C2 = document.getElementById('C2')
 let C3 = document.getElementById('C3')
 let C4 = document.getElementById('C4')
+
+
+///////////////////////////////////////////////////////////////////////////
 
 
 // All possible items that will pop out of holes
@@ -69,7 +77,7 @@ startMole.addEventListener('click', () => {
     // document.querySelector(".hole").style.height = '100px'
 
 
-const holes = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12];
+const holes = ['A1', 'A2', 'A3', 'A4', 'B1', 'B2', 'B3', 'B4', 'C1', 'C2', 'C3', 'C4'];
 let lastHole; 
 
 //two random functions
@@ -85,6 +93,12 @@ function randomHole(holes) {
     lastHole = hole;
     return hole;
 }
+
+gameGrid.setInterval()
+function summonSum(){
+    
+}
+
 
 randomHole(holes);
 
