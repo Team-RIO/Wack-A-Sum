@@ -5,7 +5,7 @@ const main = document.querySelector('main')
 const startPage = document.getElementById('#startPage')
 const playArea = document.querySelector('#playArea')
 const gameGrid = document.getElementById('gameGrid')
-const hole = document.getElementsByClassName('hole')
+const holes = document.getElementsByClassName('hole')
 const startMole = document.querySelector('#startMole')
 const title = document.getElementById("title")
 const gameOverScreen = document.getElementById("gameOverScreen")
@@ -69,7 +69,7 @@ startMole.addEventListener('click', () => {
     // document.querySelector(".hole").style.height = '100px'
 
 
-const holes = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12];
+// const holes = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12];
 let lastHole; 
 
 //two random functions
