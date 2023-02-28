@@ -1,11 +1,13 @@
 /*
 Feel free to rename or alter anything as needed, I know there's some things missing (i.e. querySelectors)
- */
+*/
 const main = document.querySelector('main')
 const playArea = document.querySelector('#playArea')
 const gameGrid = document.getElementById('gameGrid')
 const hole = document.getElementsByClassName('hole')
 const startMole = document.querySelector('#startMole')
+const title = document.getElementById("title")
+
 let A1 = document.getElementById('A1')
 let A2 = document.getElementById('A2')
 let A3 = document.getElementById('A3')
@@ -20,7 +22,6 @@ let C1 = document.getElementById('C1')
 let C2 = document.getElementById('C2')
 let C3 = document.getElementById('C3')
 let C4 = document.getElementById('C4')
-const title = document.getElementById("title")
 
 // All possible items that will pop out of holes
 // Default: Level 1
