@@ -6,7 +6,7 @@ const playArea = document.querySelector('#playArea')
 const gameGrid = document.getElementById('gameGrid')
 const hole = document.getElementsByClassName('hole')
 const startMole = document.querySelector('#startMole')
-
+const title = document.getElementById("title")
 
 // All possible items that will pop out of holes
 // Default: Level 1
@@ -41,6 +41,7 @@ playArea.style.display = "none"; // Hides The Game Screen until The Game Begins.
 
 startMole.addEventListener('click', () => {
     main.removeChild(document.querySelector("#startPage"))
+    title.style.display = "none"
     playArea.style.display = "block";
     main.style.display = 'flex';
     main.style.justifyContent = 'center';
