@@ -17,16 +17,12 @@ body {
     display:flex;
     align-items: center;
     flex-direction: column;
+    justify-content: center;
 
 }
 
-/* h1{
-    width:100%; 
-} */
 
 #title{
-    /* width: auto; */
-    /* height: 5%; */
     background-color:rgba(241, 217, 217, 0.582);
     justify-content: center;
     border: 10px rgba(94, 59, 31, 0.527) solid;
@@ -38,8 +34,6 @@ body {
 main{
     width: 90%;
     height: 75%;
-    /* background-color: rgba(255, 0, 0, 0.192); */
-    
 }
 
 #startPage {
@@ -59,8 +53,7 @@ main{
     transition-duration: 1s;
 }
 
-#titleImg {
-    /* background-color: rgba(43, 255, 0, 0.432); */
+#titleImgs {
     display:flex;
     align-items: center;
     justify-content:space-between;
@@ -80,23 +73,56 @@ img {
     background-color: #7C4C26;
     border: 10px #1C843F solid ;
     border-radius: 5%;
-    /* display:flex ; */
-    /* justify-content: center; */
-    width: 60rem;
-    height: 40rem;
+    width: 90%;
+    height:100%;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+#gameStats{
+    width: 100%;
+    display: flex;
+    justify-content: space-around;
+    margin-bottom: 20px;
+}
+
+.stat{
+    background-color: aliceblue;
+    padding: 5px;
+    scale: 1.5;
+    display: flex;
+    border: rgb(177, 175, 175) 5px solid;
+    border-radius: 5%;
+}
+
+p{
+    margin: 0%;
+}
+
+#leftStat{
+    display: flex;
+    width: 200px;
+}
+
+#rightStat{
+    display: flex;
+    width: 200px;
+    justify-content: space-between;
 }
 
 #gameGrid{
     display: grid;
-    grid-template-columns: repeat(4 ,9rem);
-    grid-template-rows:repeat(3, 6rem);
+    grid-template-columns: repeat(4, 100px);
+    grid-template-rows:repeat(3, 80px);
     background-color: #9CC527;
     border:10px #FCFF7D solid;
     border-radius:5%;
+    width: 500px;
     padding:5%;
     gap:25px;
-    margin: 7rem;
-    box-sizing: content-box;
+    /* position: absolute; */
+    /* box-sizing: border-box; */
 }
 
 .hole{
