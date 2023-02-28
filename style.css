@@ -39,6 +39,7 @@ main{
     width: 90%;
     height: 75%;
     /* background-color: rgba(255, 0, 0, 0.192); */
+    
 }
 
 #startPage {
@@ -52,8 +53,10 @@ main{
 
 #intro{
     margin-top: auto;
-    scale: 1.5;
+    scale: 2;
     color: white;
+    transform: scale(3);
+    transition-duration: 1s;
 }
 
 #titleImg {
@@ -71,4 +74,40 @@ img {
 #startMole{
     margin-top: auto;
     width: 350px;
+}
+
+#playArea{
+    background-color: #7C4C26;
+    border: 10px #1C843F solid ;
+    border-radius: 5%;
+    /* display:flex ; */
+    /* justify-content: center; */
+    width: 60rem;
+    height: 40rem;
+}
+
+#gameGrid{
+    display: grid;
+    grid-template-columns: repeat(4 ,9rem);
+    grid-template-rows:repeat(3, 6rem);
+    background-color: #9CC527;
+    border:10px #FCFF7D solid;
+    border-radius:5%;
+    padding:5%;
+    gap:25px;
+    margin: 7rem;
+    box-sizing: content-box;
+}
+
+.hole{
+    background: url(./Media/hole.png);
+    background-size: 100%;
+    background-repeat: no-repeat;
+    background-position: bottom;
+    height: 5rem;
+    align-self: baseline;
+}
+
+.hole:hover{
+    backdrop-filter: grayscale(20%);
 }

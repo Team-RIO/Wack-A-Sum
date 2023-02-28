@@ -1,6 +1,7 @@
 /*
 Feel free to rename or alter anything as needed, I know there's some things missing (i.e. querySelectors)
  */
+const main = document.querySelector('main')
 
 // All possible items that will pop out of holes
 // Default: Level 1
@@ -24,15 +25,28 @@ let score = 0; // keep track of score
 
 
 // Functions 
+const playArea = document.querySelector('#playArea')
+const gameGrid = document.getElementById('gameGrid')
+const hole = document.getElementsByClassName('hole')
 
 // Start screen  
 
-
-
 // Event listener awaits 'click' on mole ID. When clicked, the page is swapped to the game area 
-function gameStart() {
-    // code
-}
+
+playArea.style.display = "none"; // Hides The Game Screen until The Game Begins. 
+
+const startMole = document.querySelector('#startMole')
+
+startMole.addEventListener('click', () => {
+    main.removeChild(document.querySelector("#startPage"))
+    // main.appendChild(playArea)
+    playArea.style.display = "block";
+    main.style.display = 'flex';
+    main.style.justifyContent = 'center';
+})
+
+    // document.querySelector(".hole").style.height = '100px'
+
 
 
 // Game area 
