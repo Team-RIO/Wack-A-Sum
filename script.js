@@ -55,13 +55,14 @@ const items = [
 
     // Event listener awaits 'click' on mole ID. When clicked, the page is swapped to the game area 
 
-gameOverScreen.style.display = "none" // Hides The Game Over Screen 
+// gameOverScreen.style.display = "none" // Hides The Game Over Screen 
 playArea.style.display = "none"; // Hides The Game Screen until The Game Begins. 
 
 startMole.addEventListener('click', () => {
     main.removeChild(document.querySelector("#startPage"))
     title.style.display = "none"
     playArea.style.display = "flex";
+    // gameOverScreen.style.display = "flex";
     main.style.display = 'flex';
     main.style.justifyContent = 'center';
 })
@@ -110,22 +111,20 @@ randomHole(holes);
         gameGrid.removeChild(clickedItem)
         
         if(lives < 0){
-            startPage.style.display = "none";
             playArea.style.display = "none";
-            gameOverScreen.style.display = "block";
+            gameOverScreen.style.display = "flex";
         }
     
 };
 
-if(lives === 3){
-    startPage.style.display = "none";
-    playArea.style.display = "none";
-    gameOverScreen.style.display = "flex";
-}
+// if(lives === 3){
+//     playArea.style.display = "none";
+//     gameOverScreen.style.display = "flex";
+// }
 
 gameGrid.addEventListener('click', updateGame);
 
-
+startPage.style.display = "none"
 // Game over screen
 // if(lives < 0){
 //     startPage.style.display = "none";

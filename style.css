@@ -137,3 +137,26 @@ p{
 .hole:hover{
     backdrop-filter: grayscale(20%);
 }
+
+#gameOverScreen{
+    display: none;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    width: 75%;
+    /* margin-top: 250px; */
+}
+
+#gameOverText{
+    color: white;
+    font-size:500%;
+    margin-bottom: 0px;
+}
+#restartMole{
+    margin-top: 150px;
+}
+
+#tryAgain{
+    color: white;
+    font-size: xxx-large;
+}
