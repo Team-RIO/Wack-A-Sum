@@ -10,6 +10,10 @@ const startMole = document.querySelector('#startMole')
 const title = document.getElementById("title")
 const gameOverScreen = document.getElementById("gameOverScreen")
 
+let scoreUpdate = document.querySelector('#score');
+let livesUpdate = document.querySelector('#lives');
+let levelUpdate = document.querySelector('#lvl');
+
 let A1 = document.getElementById('A1')
 let A2 = document.getElementById('A2')
 let A3 = document.getElementById('A3')
@@ -103,8 +107,10 @@ randomHole(holes);
 
         if(item.class === 'hazard'){
             lives--;
+            livesUpdate.textContent = lives;
         }else if(item.class === 'safe'){
             score++;
+            scoreUpdate.textContent = score;
         }
         gameGrid.removeChild(clickedItem)
         
