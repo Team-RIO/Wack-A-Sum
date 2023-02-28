@@ -58,7 +58,7 @@ playArea.style.display = "none"; // Hides The Game Screen until The Game Begins.
 startMole.addEventListener('click', () => {
     main.removeChild(document.querySelector("#startPage"))
     title.style.display = "none"
-    playArea.style.display = "block";
+    playArea.style.display = "flex";
     main.style.display = 'flex';
     main.style.justifyContent = 'center';
 })
