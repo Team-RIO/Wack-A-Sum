@@ -2,6 +2,11 @@
 Feel free to rename or alter anything as needed, I know there's some things missing (i.e. querySelectors)
  */
 const main = document.querySelector('main')
+const playArea = document.querySelector('#playArea')
+const gameGrid = document.getElementById('gameGrid')
+const hole = document.getElementsByClassName('hole')
+const startMole = document.querySelector('#startMole')
+
 
 // All possible items that will pop out of holes
 // Default: Level 1
@@ -25,9 +30,6 @@ const items = [
 
 
 // Functions 
-const playArea = document.querySelector('#playArea')
-const gameGrid = document.getElementById('gameGrid')
-const hole = document.getElementsByClassName('hole')
 
 // Start screen  
 
@@ -35,7 +37,6 @@ const hole = document.getElementsByClassName('hole')
 
 playArea.style.display = "none"; // Hides The Game Screen until The Game Begins. 
 
-const startMole = document.querySelector('#startMole')
 
 startMole.addEventListener('click', () => {
     main.removeChild(document.querySelector("#startPage"))
@@ -69,7 +70,6 @@ randomHole(holes);
 // Game area 
 // Event listener needed for 'click' => effect changes based on the element (hazard or safe)
 // This function should contain conditions for how the item clicked affects lives/score updates
-const gameGrid = document.getElementById('game-area');
 
     let score = 0;
     let lives = 3;
