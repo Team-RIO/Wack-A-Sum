@@ -75,15 +75,14 @@ let lastHole;
 //two random functions
     //one for hole, one for mole
 //place item in random hole
-function randomHole(array) {
-    console.log(array, array.length);
+function randomHole(holes) {
     const rand = Math.floor(Math.random() * holes.length);
     const hole = holes[rand];
-    lastHole = hole;
     if (hole === lastHole) {
         console.log('getting new hole');
         return randomHole(holes);
     }
+    lastHole = hole;
     return hole;
 }
 
