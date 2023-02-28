@@ -6,6 +6,20 @@ const playArea = document.querySelector('#playArea')
 const gameGrid = document.getElementById('gameGrid')
 const hole = document.getElementsByClassName('hole')
 const startMole = document.querySelector('#startMole')
+let A1 = document.getElementById('A1')
+let A2 = document.getElementById('A2')
+let A3 = document.getElementById('A3')
+let A4 = document.getElementById('A4')
+
+let B1 = document.getElementById('B1')
+let B2 = document.getElementById('B2')
+let B3 = document.getElementById('B3')
+let B4 = document.getElementById('B4')
+
+let C1 = document.getElementById('C1')
+let C2 = document.getElementById('C2')
+let C3 = document.getElementById('C3')
+let C4 = document.getElementById('C4')
 const title = document.getElementById("title")
 
 // All possible items that will pop out of holes
@@ -53,6 +67,7 @@ startMole.addEventListener('click', () => {
 const holes = [A1, A2, A3, A4, B1, B2, B3, B4, C1, C2, C3, C4];
 let lastHole; 
 
+//place item in random hole
 function randomHole(array) {
     console.log(array, array.length);
     const rand = Math.floor(Math.random() * holes.length);
