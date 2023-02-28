@@ -1,6 +1,6 @@
 /*
 Feel free to rename or alter anything as needed, I know there's some things missing (i.e. querySelectors)
-*/
+ */
 const main = document.querySelector('main')
 const playArea = document.querySelector('#playArea')
 const gameGrid = document.getElementById('gameGrid')
@@ -23,12 +23,13 @@ let C2 = document.getElementById('C2')
 let C3 = document.getElementById('C3')
 let C4 = document.getElementById('C4')
 
+
 // All possible items that will pop out of holes
 // Default: Level 1
 const items = [
-    {id: 'mole', chance: 1, class:'safe' },
+    {id: 'mole', chance: 1, class:'safe', image: "./Media/Title Mole.png"},
     {id: 'bomb', chance: 0, class:'hazard'},
-    {id: 'steve', chance: 0, class: 'safe'},
+    {id: 'steve', chance: 0, class: 'safe', image: "./sprites/stevehuh.png"},
     {id: 'poop', chance: 0, class:'hazard'}, 
     {id: 'imposter', chance: 0, class:'hazard'},
 ];
