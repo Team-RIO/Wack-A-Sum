@@ -31,25 +31,25 @@ const items = [
 
 // Functions 
 
-// Start screen  
 
-// Event listener awaits 'click' on mole ID. When clicked, the page is swapped to the game area 
+
+// Start screen - Isaac
+
+    // Event listener awaits 'click' on mole ID. When clicked, the page is swapped to the game area 
 
 playArea.style.display = "none"; // Hides The Game Screen until The Game Begins. 
 
-
 startMole.addEventListener('click', () => {
     main.removeChild(document.querySelector("#startPage"))
-    // main.appendChild(playArea)
     playArea.style.display = "block";
     main.style.display = 'flex';
     main.style.justifyContent = 'center';
 })
 
-    // document.querySelector(".hole").style.height = '100px'
 
 
-const holes = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12];
+// const holes = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]; // Isaac ~ "Commented this out in case ur code was dependant on it, also write down who wrote this code since they gon use it to grade us" 
+const holes = [A1, A2, A3, A4, B1, B2, B3, B4, C1, C2, C3, C4];
 let lastHole; 
 
 function randomHole(array) {
