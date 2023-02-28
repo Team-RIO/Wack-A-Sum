@@ -2,11 +2,13 @@
 Feel free to rename or alter anything as needed, I know there's some things missing (i.e. querySelectors)
  */
 const main = document.querySelector('main')
+const startPage = document.getElementById('#startPage')
 const playArea = document.querySelector('#playArea')
 const gameGrid = document.getElementById('gameGrid')
 const hole = document.getElementsByClassName('hole')
 const startMole = document.querySelector('#startMole')
 const title = document.getElementById("title")
+const gameOverScreen = document.getElementById("gameOverScreen")
 
 let A1 = document.getElementById('A1')
 let A2 = document.getElementById('A2')
@@ -47,38 +49,40 @@ const items = [
 
 // Functions 
 
+// Start screen  
 
+// Event listener awaits 'click' on mole ID. When clicked, the page is swapped to the game area 
 
-// Start screen - Isaac
-
-    // Event listener awaits 'click' on mole ID. When clicked, the page is swapped to the game area 
-
+// gameOverScreen.style.display = "none" // Hides The Game Over Screen 
 playArea.style.display = "none"; // Hides The Game Screen until The Game Begins. 
+
 
 startMole.addEventListener('click', () => {
     main.removeChild(document.querySelector("#startPage"))
     title.style.display = "none"
     playArea.style.display = "flex";
+    // gameOverScreen.style.display = "flex";
     main.style.display = 'flex';
     main.style.justifyContent = 'center';
 })
 
+    // document.querySelector(".hole").style.height = '100px'
 
 
-// const holes = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]; // Isaac ~ "Commented this out in case ur code was dependant on it, also write down who wrote this code since they gon use it to grade us" 
-const holes = [A1, A2, A3, A4, B1, B2, B3, B4, C1, C2, C3, C4];
+const holes = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12];
 let lastHole; 
 
+//two random functions
+    //one for hole, one for mole
 //place item in random hole
-function randomHole(array) {
-    console.log(array, array.length);
+function randomHole(holes) {
     const rand = Math.floor(Math.random() * holes.length);
     const hole = holes[rand];
-    lastHole = hole;
     if (hole === lastHole) {
         console.log('getting new hole');
         return randomHole(holes);
     }
+    lastHole = hole;
     return hole;
 }
 
@@ -94,20 +98,41 @@ randomHole(holes);
 
     function updateGame(event){
         const clickedItem = event.target;
-        const itemClass = clickedItem.classList[0];
+        const itemId = clickedItem.id;
+        const item = items.find(item => item.id === itemId)
 
-        if(itemClass === 'hazard'){
+        if(item.class === 'hazard'){
             lives--;
-        }else if(itemClass === 'safe'){
+        }else if(item.class === 'safe'){
             score++;
         }
         gameGrid.removeChild(clickedItem)
+        
+        if(lives < 0){
+            playArea.style.display = "none";
+            gameOverScreen.style.display = "flex";
+        }
     
 };
 
+// if(lives === 3){
+//     playArea.style.display = "none";
+//     gameOverScreen.style.display = "flex";
+// }
+
 gameGrid.addEventListener('click', updateGame);
 
+startPage.style.display = "none"
 // Game over screen
+// if(lives < 0){
+//     startPage.style.display = "none";
+//         // main.removeChild(document.querySelector("#startPage"))
+//         title.style.display = "none"
+//         playArea.style.display = "block";
+//         main.style.display = 'flex';
+//         main.style.justifyContent = 'center';
+
+// }
 // Restart game     => Event listener awaits 'click' on mole ID. When clicked, the player is returned to the game area and a new game begins 
 function restart() {
     // code
