@@ -2,11 +2,13 @@
 Feel free to rename or alter anything as needed, I know there's some things missing (i.e. querySelectors)
  */
 const main = document.querySelector('main')
+const startPage = document.getElementById('#startPage')
 const playArea = document.querySelector('#playArea')
 const gameGrid = document.getElementById('gameGrid')
 const hole = document.getElementsByClassName('hole')
 const startMole = document.querySelector('#startMole')
 const title = document.getElementById("title")
+const gameOverScreen = document.getElementById("gameOverScreen")
 
 let A1 = document.getElementById('A1')
 let A2 = document.getElementById('A2')
@@ -53,6 +55,7 @@ const items = [
 
     // Event listener awaits 'click' on mole ID. When clicked, the page is swapped to the game area 
 
+gameOverScreen.style.display = "none" // Hides The Game Over Screen 
 playArea.style.display = "none"; // Hides The Game Screen until The Game Begins. 
 
 startMole.addEventListener('click', () => {
@@ -69,6 +72,8 @@ startMole.addEventListener('click', () => {
 const holes = [A1, A2, A3, A4, B1, B2, B3, B4, C1, C2, C3, C4];
 let lastHole; 
 
+//two random functions
+    //one for hole, one for mole
 //place item in random hole
 function randomHole(array) {
     console.log(array, array.length);
@@ -94,20 +99,43 @@ randomHole(holes);
 
     function updateGame(event){
         const clickedItem = event.target;
-        const itemClass = clickedItem.classList[0];
+        const itemId = clickedItem.id;
+        const item = items.find(item => item.id === itemId)
 
-        if(itemClass === 'hazard'){
+        if(item.class === 'hazard'){
             lives--;
-        }else if(itemClass === 'safe'){
+        }else if(item.class === 'safe'){
             score++;
         }
         gameGrid.removeChild(clickedItem)
+        
+        if(lives < 0){
+            startPage.style.display = "none";
+            playArea.style.display = "none";
+            gameOverScreen.style.display = "block";
+        }
     
 };
 
+if(lives === 3){
+    startPage.style.display = "none";
+    playArea.style.display = "none";
+    gameOverScreen.style.display = "flex";
+}
+
 gameGrid.addEventListener('click', updateGame);
 
+
 // Game over screen
+// if(lives < 0){
+//     startPage.style.display = "none";
+//         // main.removeChild(document.querySelector("#startPage"))
+//         title.style.display = "none"
+//         playArea.style.display = "block";
+//         main.style.display = 'flex';
+//         main.style.justifyContent = 'center';
+
+// }
 // Restart game     => Event listener awaits 'click' on mole ID. When clicked, the player is returned to the game area and a new game begins 
 function restart() {
     // code
