@@ -110,86 +110,90 @@ startMole.onclick = ( () => {
 
 
 // const holes = ['A1', 'A2', 'A3', 'A4', 'B1', 'B2', 'B3', 'B4', 'C1', 'C2', 'C3', 'C4'];
-let lastHole; 
 
 //two random functions
-    //one for hole, one for mole
+//one for hole, one for mole
 //place item in random hole
-function randomHole(holes) {
-    const rand = Math.floor(Math.random() * holes.length);
-    const hole = holes[rand];
-    if (hole === lastHole) {
-        console.log('getting new hole');
-        return randomHole(holes);
-    }
-    lastHole = hole;
-    return hole;
-}
+let lastHole; 
+// setInterval(popUp(),1)
+function popUp(){
 
-function randomItem(items) {
-    // calculate the total probability of all items
-    const totalProbability = items.reduce((total, item) => total + item.chance, 0);
-    // generate a random number between 0 and the total probability
-    const rand = Math.random() * totalProbability;
-    // iterate through the items and find the one that corresponds to the random number
-    let cumulativeProbability = 0;
-    for (let i = 0; i < items.length; i++) {
-      cumulativeProbability += items[i].chance;
-      if (rand < cumulativeProbability) {
-        return items[i];
-      }
-    }
-  }
-
-  function placeItem(holes, items) {
-    const hole = randomHole(holes);
-    const item = randomItem(items);
-  
-    // check if the item is a hazard
-    if (item.class === 'hazard') {
-      hole.classList.add('hole-hazard');
-    }
-  
-    // append item image to the hole
-    const image = new Image();
-    image.src = item.image;
-    hole.appendChild(image);
-  }
-
-// Game area 
-// Event listener needed for 'click' => effect changes based on the element (hazard or safe)
-// This function should contain conditions for how the item clicked affects lives/score updates
-
-    let score = 0;
-    let lives = 3;
-
-    function updateGame(event,items){
-        const clickedItem = event.target;
-        const itemId = clickedItem.id;
-        const item = items.find(item => items.id === itemId)
-
-        if(item.class === 'hazard'){
-            lives--;
-            livesUpdate.textContent = lives;
-        }else if(item.class === 'safe'){
-            score++;
-            scoreUpdate.textContent = score;
+    function randomHole(holes) {
+        const rand = Math.floor(Math.random() * holes.length);
+        const hole = holes[rand];
+        if (hole === lastHole) {
+            console.log('getting new hole');
+            return randomHole(holes);
         }
-        gameGrid.removeChild(clickedItem)
-        
-        if(lives < 0){
-            playArea.style.display = "none";
-            gameOverScreen.style.display = "flex";
+        lastHole = hole;
+        return hole;
+    }
+
+    function randomItem(items) {
+        // calculate the total probability of all items
+        const totalProbability = items.reduce((total, item) => total + item.chance, 0);
+        // generate a random number between 0 and the total probability
+        const rand = Math.random() * totalProbability;
+        // iterate through the items and find the one that corresponds to the random number
+        let cumulativeProbability = 0;
+        for (let i = 0; i < items.length; i++) {
+        cumulativeProbability += items[i].chance;
+        if (rand < cumulativeProbability) {
+            return items[i];
+        }
+        }
+    }
+
+    function placeItem(holes, items) {
+        const hole = randomHole(holes);
+        const item = randomItem(items);
+    
+        // check if the item is a hazard
+        if (item.class === 'hazard') {
+        hole.classList.add('hole-hazard');
         }
     
-};
+        // append item image to the hole
+        const image = new Image();
+        image.src = item.image;
+        hole.appendChild(image);
+    }
 
+    // Game area 
+    // Event listener needed for 'click' => effect changes based on the element (hazard or safe)
+    // This function should contain conditions for how the item clicked affects lives/score updates
+
+    //make updateGame to make it releveant to our code, append  them
+        let score = 0;
+        let lives = 3;
+
+        function updateGame(event,items){
+            const clickedItem = event.target;
+            const itemId = clickedItem.id;
+            const item = items.find(item => items.id === itemId)
+
+            if(item.class === 'hazard'){
+                lives--;
+                livesUpdate.textContent = lives;
+            }else if(item.class === 'safe'){
+                score++;
+                scoreUpdate.textContent = score;
+            }
+            gameGrid.removeChild(clickedItem)
+            
+            if(lives < 0){
+                playArea.style.display = "none";
+                gameOverScreen.style.display = "flex";
+            }
+        
+    };
+};
 // if(lives === 3){
 //     playArea.style.display = "none";
 //     gameOverScreen.style.display = "flex";
 // }
 
-gameGrid.addEventListener('click', updateGame);
+// gameGrid.addEventListener('click', updateGame);
 
 startPage.style.display = "none"
 // Game over screen
