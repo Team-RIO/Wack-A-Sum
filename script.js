@@ -9,6 +9,11 @@ const holes = document.querySelector('.hole')
 const startMole = document.querySelector('#startMole')
 const title = document.getElementById("title")
 const gameOverScreen = document.getElementById("gameOverScreen")
+const livesStat = document.getElementById("lives")
+
+///////////////////////////////////////////////////////////////////////////
+
+    // Hole Declarations - O'Shaun
 
 const scoreUpdate = document.querySelector('#score');
 const livesUpdate = document.querySelector('#lives');
@@ -30,12 +35,42 @@ const C3 = document.getElementById('C3')
 const C4 = document.getElementById('C4')
 
 
+///////////////////////////////////////////////////////////////////////////
+
+// Sprite Creation - Isaac
+
+const steve = document.createElement('img');
+steve.classList = "sprite";
+steve.src = './sprites/steve.png';
+
+const bomb = document.createElement('img');
+bomb.classList = "sprite";
+bomb.src = './sprites/bomb.png';
+
+const mole = document.createElement('img');
+mole.classList = "sprite";
+mole.src = './sprites/mole.png';
+
+///////////////////////////////////////////////////////////////////////////
+
+
+
+
+
+// Elements Array 
+
+    const safe = [steve , mole]
+    const harm = [bomb]
+    const selection = []
+///////////////////////////////////////////////////////////////////////////
+
+
 // All possible items that will pop out of holes
 // Default: Level 1
 const items = [
-    {id: 'mole', chance: 1, class:'safe', image: "./Media/Title Mole.png"},
+    {id: 'mole', chance: 1, class:'safe', image: "./Media/mole.png"},
     {id: 'bomb', chance: 0, class:'hazard', image: "Media/bomb.png"},
-    {id: 'steve', chance: 0, class: 'safe', image: "./sprites/stevehuh.png"},
+    {id: 'steve', chance: 0, class: 'safe', image: "./sprites/steve.png"},
 ];
 
 
@@ -46,6 +81,8 @@ const items = [
 // let score = 0; // keep track of score
 // let multiplier = 1;    => potential bonus feature 
 
+
+// We wanna create images with the type of "button" and when they are clicked on, they add to tht score
 
 
 
@@ -59,7 +96,7 @@ const items = [
 playArea.style.display = "none"; // Hides The Game Screen until The Game Begins. 
 
 
-startMole.addEventListener('click', () => {
+startMole.onclick = ( () => {
     main.removeChild(document.querySelector("#startPage"))
     title.style.display = "none"
     playArea.style.display = "flex";
@@ -68,10 +105,11 @@ startMole.addEventListener('click', () => {
     main.style.justifyContent = 'center';
 })
 
+
     // document.querySelector(".hole").style.height = '100px'
 
 
-// const holes = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12];
+// const holes = ['A1', 'A2', 'A3', 'A4', 'B1', 'B2', 'B3', 'B4', 'C1', 'C2', 'C3', 'C4'];
 let lastHole; 
 
 //two random functions

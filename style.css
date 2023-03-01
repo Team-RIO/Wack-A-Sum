@@ -62,6 +62,13 @@ img {
     width:300px; 
 }
 
+.sprite{
+    width: 60%;
+    display: flex;
+    justify-content: center;
+    margin: auto;
+}
+
 #startMole{
     margin-top: auto;
     width: 350px;
@@ -132,6 +139,10 @@ p{
 
 .hole:hover{
     backdrop-filter: grayscale(20%);
+    background: url(./Media/bomb.png);
+    /* background-size: 10%; */
+    /* background-repeat: no-repeat; */
+    /* height: 5rem; */
 }
 
 #gameOverScreen{
