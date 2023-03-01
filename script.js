@@ -167,23 +167,30 @@ function popUp(){
         let score = 0;
         let lives = 3;
 
-        function updateGame(event,items){
+        function updateGame(event, items) {
             const clickedItem = event.target;
-            const itemId = clickedItem.id;
-            const item = items.find(item => items.id === itemId)
+            const itemId = clickedItem.parentNode.id;
+            const item = items.find(item => item.id === itemId);
 
-            if(item.class === 'hazard'){
+            if (!item) {
+                // clicked outside of a mole hole
+                return;
+            }
+
+            if (item.class === 'hazard') {
                 lives--;
                 livesUpdate.textContent = lives;
-            }else if(item.class === 'safe'){
+            } else if (item.class === 'safe') {
                 score++;
                 scoreUpdate.textContent = score;
             }
-            gameGrid.removeChild(clickedItem)
-            
-            if(lives < 0){
-                playArea.style.display = "none";
-                gameOverScreen.style.display = "flex";
+
+            const moleHole = clickedItem.parentNode;
+            moleHole.removeChild(clickedItem);
+
+            if (lives < 0) {
+                playArea.style.display = 'none';
+                gameOverScreen.style.display = 'flex';
             }
         
     };
