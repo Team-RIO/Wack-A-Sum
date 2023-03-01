@@ -125,6 +125,7 @@ function randomHole(holes) {
     lastHole = hole;
     return hole;
 }
+
 function randomItem(items) {
     // calculate the total probability of all items
     const totalProbability = items.reduce((total, item) => total + item.chance, 0);
