@@ -1,5 +1,5 @@
 /*
-Feel free to rename or alter anything as needed, I know there's some things missing (i.e. querySelectors)
+Feel free to rename or alter anything as needed, I know there's some things missing (i.e. querySelectors) ~ Raven
  */
 const main = document.querySelector('main')
 const startPage = document.getElementById('#startPage')
@@ -61,17 +61,18 @@ mole.src = './sprites/mole.png';
 
     const safe = [steve , mole]
     const harm = [bomb]
-    const selection = []
+    const selection = [...safe,...harm]
 ///////////////////////////////////////////////////////////////////////////
 
 
-// All possible items that will pop out of holes
+// All possible items that will pop out of holes - Raven
 // Default: Level 1
 const items = [
     {id: 'mole', chance: 1, class:'safe', image: "./Media/mole.png"},
     {id: 'bomb', chance: 0, class:'hazard', image: "Media/bomb.png"},
     {id: 'steve', chance: 0, class: 'safe', image: "./sprites/steve.png"},
 ];
+
 
 
 // Variables that update as the game progresses
@@ -106,103 +107,130 @@ startMole.onclick = ( () => {
 })
 
 
+let score = 0;
+let lives = 3;
     // document.querySelector(".hole").style.height = '100px'
 
 
-// const holes = ['A1', 'A2', 'A3', 'A4', 'B1', 'B2', 'B3', 'B4', 'C1', 'C2', 'C3', 'C4'];
+const cellList = ['A1', 'A2', 'A3', 'A4', 'B1', 'B2', 'B3', 'B4', 'C1', 'C2', 'C3', 'C4'];
 
 //two random functions
 //one for hole, one for mole
 //place item in random hole
 let lastHole; 
 
-function popUp(){
 
-    // Random hole generation that avoids duplicates - Raven
-    function randomHole(holes) {
-        const rand = Math.floor(Math.random() * holes.length);
-        const hole = holes[rand];
-        if (hole === lastHole) {
-            console.log('getting new hole');
-            return randomHole(holes);
-        }
-        lastHole = hole;
-        return hole;
-    }
+// let interval;
+// // Items appear for random durations - Raven
+// setInterval(() => {
+//     interval = Math.round(Math.random() * (3 - 1) + 1);
+// }, 100 );
 
-    function randomItem(items) {
-        // calculate the total probability of all items
-        const totalProbability = items.reduce((total, item) => total + item.chance, 0);
-        // generate a random number between 0 and the total probability
-        const rand = Math.random() * totalProbability;
-        // iterate through the items and find the one that corresponds to the random number
-        let cumulativeProbability = 0;
-        for (let i = 0; i < items.length; i++) {
-            cumulativeProbability += items[i].chance;
-            if (rand < cumulativeProbability) {
-                return items[i];
-            }
-        }
+
+// Random hole Selector that avoids duplicates - Raven
+
+function randomHole(holes) {
+    const rand = Math.floor(Math.random() * holes.length);
+    const hole = holes[rand];
+    if (hole === lastHole) {
+        console.log('getting new hole');
+        return randomHole(holes);
     }
-    
-    // Items appear for random durations - Raven
-    function randomTime(min, max) {
-        return Math.round(Math.random() * (max - min) + min);
+    lastHole = hole;
+    return hole;
+}
+
+// Get The Random Item
+function randomItem(rand) {
+    let total = 0;
+    for (let i = 0; i < items.length; i++){
+        total += items[i].chance;
     } 
-
-    function placeItem(holes, items) {
-        const hole = randomHole(holes);
-        const item = randomItem(items);
-        const time = randomTime(500, 2000); 
-    
-        // check if the item is a hazard
-        if (item.class === 'hazard') {
-        hole.classList.add('hole-hazard');
+    for (let i = 0; i < items.length; i++) {
+        let item = items[i];
+        let rand = Math.floor(Math.random() * total);
+        if (rand < item.chance) {
+            return item.id;
         }
-    
-        // append item image to the hole
-        const image = new Image();
-        image.src = item.image;
-        hole.appendChild(image);
+        rand -= item.chance;
     }
+}
 
-    // Game area 
-    // Event listener needed for 'click' => effect changes based on the element (hazard or safe)
-    // This function should contain conditions for how the item clicked affects lives/score updates
-
-    //make updateGame to make it releveant to our code, append  them
-        let score = 0;
-        let lives = 3;
-
-        function updateGame(event,items){
-            const clickedItem = event.target;
-            const itemId = clickedItem.id;
-            const item = items.find(item => items.id === itemId)
-
-            if(item.class === 'hazard'){
-                lives--;
-                livesUpdate.textContent = lives;
-            }else if(item.class === 'safe'){
-                score++;
-                scoreUpdate.textContent = score;
-            }
-            gameGrid.removeChild(clickedItem)
-            
-            if(lives < 0){
-                playArea.style.display = "none";
-                gameOverScreen.style.display = "flex";
-            }
-        
-    };
-};
-// if(lives === 3){
-//     playArea.style.display = "none";
-//     gameOverScreen.style.display = "flex";
+// function randomItem(arr) {
+//     // calculate the total probability of all items
+//     const totalProbability = arr.reduce((total, item) => total + item.chance, 0);
+//     // generate a random number between 0 and the total probability
+//     const rand = Math.random() * totalProbability;
+//     // iterate through the items and find the one that corresponds to the random number
+//     let cumulativeProbability = 0;
+//     for (let i = 0; i < arr.length; i++) {
+//         cumulativeProbability += arr[i].chance;
+//         if (rand < cumulativeProbability) {
+//             console.log(arr[i])
+//             return arr[i];
+//         }
+//     }
 // }
 
-// gameGrid.addEventListener('click', updateGame);
+function sel() {
+    const count = selection.length
+    const rand = Math.floor(Math.random() * count)
+    return rand
+}
 
-startPage.style.display = "none"
+// Creates the Mole
+
+
+const begin = setInterval(() => {
+    
+    
+    
+    const hole = randomHole(cellList)
+    // console.log(hole)
+    
+    let item = sel(selection)
+   // console.log(item)
+    
+    
+    
+    
+    function placeItem() {
+
+        // const time = randomTime(500, 2000); 
+        
+            const tempSlot = document.getElementById(hole)
+            tempSlot.append(selection[item]);
+
+        }
+
+        placeItem()
+        
+        //make updateGame to make it releveant to our code, append  them
+    
+    
+    // function updateGame(event,items){
+        //     const clickedItem = event.target;
+        //     const itemId = clickedItem.id;
+        //     const item = items.find(item => items.id === itemId)
+        
+        //     if(item.class === 'hazard'){
+            //         lives--;
+            //         livesUpdate.textContent = lives;
+            //     }else if(item.class === 'safe'){
+                //         score++;
+        //         scoreUpdate.textContent = score;
+        //     }
+        //     gameGrid.removeChild(clickedItem)
+            
+        //     if(lives < 0){
+        //         playArea.style.display = "none";
+        //         gameOverScreen.style.display = "flex";
+        //     }
+            
+        // };
+}, 1000 )
+        
+        // startPage.style.display = "none"
 // Game over screen
 //     startPage.style.display = "none";
 //         // main.removeChild(document.querySelector("#startPage"))
