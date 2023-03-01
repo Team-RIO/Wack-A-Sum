@@ -5,29 +5,29 @@ const main = document.querySelector('main')
 const startPage = document.getElementById('#startPage')
 const playArea = document.querySelector('#playArea')
 const gameGrid = document.getElementById('gameGrid')
-const holes = document.getElementsByClassName('hole')
+const holes = document.querySelector('.hole')
 const startMole = document.querySelector('#startMole')
 const title = document.getElementById("title")
 const gameOverScreen = document.getElementById("gameOverScreen")
 
-let scoreUpdate = document.querySelector('#score');
-let livesUpdate = document.querySelector('#lives');
-let levelUpdate = document.querySelector('#lvl');
+const scoreUpdate = document.querySelector('#score');
+const livesUpdate = document.querySelector('#lives');
+const levelUpdate = document.querySelector('#lvl');
 
-let A1 = document.getElementById('A1')
-let A2 = document.getElementById('A2')
-let A3 = document.getElementById('A3')
-let A4 = document.getElementById('A4')
+const A1 = document.getElementById('A1')
+const A2 = document.getElementById('A2')
+const A3 = document.getElementById('A3')
+const A4 = document.getElementById('A4')
 
-let B1 = document.getElementById('B1')
-let B2 = document.getElementById('B2')
-let B3 = document.getElementById('B3')
-let B4 = document.getElementById('B4')
+const B1 = document.getElementById('B1')
+const B2 = document.getElementById('B2')
+const B3 = document.getElementById('B3')
+const B4 = document.getElementById('B4')
 
-let C1 = document.getElementById('C1')
-let C2 = document.getElementById('C2')
-let C3 = document.getElementById('C3')
-let C4 = document.getElementById('C4')
+const C1 = document.getElementById('C1')
+const C2 = document.getElementById('C2')
+const C3 = document.getElementById('C3')
+const C4 = document.getElementById('C4')
 
 
 // All possible items that will pop out of holes
@@ -36,8 +36,6 @@ const items = [
     {id: 'mole', chance: 1, class:'safe', image: "./Media/Title Mole.png"},
     {id: 'bomb', chance: 0, class:'hazard', image: "Media/bomb.png"},
     {id: 'steve', chance: 0, class: 'safe', image: "./sprites/stevehuh.png"},
-    {id: 'poop', chance: 0, class:'hazard'}, 
-    {id: 'imposter', chance: 0, class:'hazard'},
 ];
 
 
@@ -89,21 +87,35 @@ function randomHole(holes) {
     lastHole = hole;
     return hole;
 }
+function randomItem(items) {
+    // calculate the total probability of all items
+    const totalProbability = items.reduce((total, item) => total + item.chance, 0);
+    // generate a random number between 0 and the total probability
+    const rand = Math.random() * totalProbability;
+    // iterate through the items and find the one that corresponds to the random number
+    let cumulativeProbability = 0;
+    for (let i = 0; i < items.length; i++) {
+      cumulativeProbability += items[i].chance;
+      if (rand < cumulativeProbability) {
+        return items[i];
+      }
+    }
+  }
 
-function placeItem(){
-    const itemChosen = Math.floor(Math.random() * items.length)
-    const itemID = items[itemChosen].id
-    const itemImage = items[itemChosen].image
-    
-    let hole = randomHole(holes);
-
-    //place 
-    
-
-}
-
-randomHole(holes);
-
+  function placeItem(holes, items) {
+    const hole = randomHole(holes);
+    const item = randomItem(items);
+  
+    // check if the item is a hazard
+    if (item.class === 'hazard') {
+      hole.classList.add('hole-hazard');
+    }
+  
+    // append item image to the hole
+    const image = new Image();
+    image.src = item.image;
+    hole.appendChild(image);
+  }
 
 // Game area 
 // Event listener needed for 'click' => effect changes based on the element (hazard or safe)
@@ -112,10 +124,10 @@ randomHole(holes);
     let score = 0;
     let lives = 3;
 
-    function updateGame(event){
+    function updateGame(event,items){
         const clickedItem = event.target;
         const itemId = clickedItem.id;
-        const item = items.find(item => item.id === itemId)
+        const item = items.find(item => items.id === itemId)
 
         if(item.class === 'hazard'){
             lives--;
@@ -152,17 +164,17 @@ startPage.style.display = "none"
 
 // }
 // Restart game     => Event listener awaits 'click' on mole ID. When clicked, the player is returned to the game area and a new game begins 
-function restart() {
-    // code
-}
+// function restart() {
+//     // code
+// }
 
 
 
 // End Screen
 
+//-----------------------------------------
 
-
-
+placeItem()
 
 
 
