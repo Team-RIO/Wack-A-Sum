@@ -13,7 +13,7 @@ const livesStat = document.getElementById("lives")
 
 ///////////////////////////////////////////////////////////////////////////
 
-    // Hole Declarations
+    // Hole Declarations - O'Shaun
 
 let scoreUpdate = document.querySelector('#score');
 let livesUpdate = document.querySelector('#lives');
@@ -37,16 +37,44 @@ let C4 = document.getElementById('C4')
 
 ///////////////////////////////////////////////////////////////////////////
 
+// Sprite Creation - Isaac
+
+const steve = document.createElement('img');
+steve.classList = "sprite";
+steve.src = './sprites/steve.png';
+
+const bomb = document.createElement('img');
+bomb.classList = "sprite";
+bomb.src = './sprites/bomb.png';
+
+const mole = document.createElement('img');
+mole.classList = "sprite";
+mole.src = './sprites/mole.png';
+
+///////////////////////////////////////////////////////////////////////////
+
+
+
+
+
+// Elements Array 
+
+    const safe = [steve , mole]
+    const harm = [bomb]
+    const selection = []
+///////////////////////////////////////////////////////////////////////////
+
 
 // All possible items that will pop out of holes
 // Default: Level 1
-const items = [
-    {id: 'mole', chance: 1, class:'safe', image: "./Media/Title Mole.png"},
-    {id: 'bomb', chance: 0, class:'hazard'},
-    {id: 'steve', chance: 0, class: 'safe', image: "./sprites/stevehuh.png"},
-    {id: 'poop', chance: 0, class:'hazard'}, 
-    {id: 'imposter', chance: 0, class:'hazard'},
-];
+
+// const items = [
+//     {id: 'mole', chance: 1, class:'safe', image: "./Media/Title Mole.png"},
+//     {id: 'bomb', chance: 0, class:'hazard'},
+//     {id: 'steve', chance: 0, class: 'safe', image: "./sprites/stevehuh.png"},
+//     {id: 'poop', chance: 0, class:'hazard'}, 
+//     {id: 'imposter', chance: 0, class:'hazard'},
+// ];
 
 
 // Variables that update as the game progresses
@@ -56,6 +84,8 @@ const items = [
 // let score = 0; // keep track of score
 // let multiplier = 1;    => potential bonus feature 
 
+
+// We wanna create images with the type of "button" and when they are clicked on, they add to tht score
 
 
 
@@ -69,7 +99,7 @@ const items = [
 playArea.style.display = "none"; // Hides The Game Screen until The Game Begins. 
 
 
-startMole.addEventListener('click', () => {
+startMole.onclick = ( () => {
     main.removeChild(document.querySelector("#startPage"))
     title.style.display = "none"
     playArea.style.display = "flex";
@@ -77,6 +107,7 @@ startMole.addEventListener('click', () => {
     main.style.display = 'flex';
     main.style.justifyContent = 'center';
 })
+
 
     // document.querySelector(".hole").style.height = '100px'
 
