@@ -1,7 +1,6 @@
 body {
     margin: 0px;
     padding: 0%;
-    /* aspect-ratio: 16/9; */
     display:flex;
     align-items: center;
     flex-direction: column;
@@ -18,7 +17,6 @@ body {
     align-items: center;
     flex-direction: column;
     justify-content: center;
-
 }
 
 
@@ -121,8 +119,6 @@ p{
     width: 500px;
     padding:5%;
     gap:25px;
-    /* position: absolute; */
-    /* box-sizing: border-box; */
 }
 
 .hole{
@@ -144,7 +140,6 @@ p{
     align-items: center;
     flex-direction: column;
     width: 75%;
-    /* margin-top: 250px; */
 }
 
 #gameOverText{

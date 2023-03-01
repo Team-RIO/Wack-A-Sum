@@ -10,6 +10,10 @@ const startMole = document.querySelector('#startMole')
 const title = document.getElementById("title")
 const gameOverScreen = document.getElementById("gameOverScreen")
 
+let scoreUpdate = document.querySelector('#score');
+let livesUpdate = document.querySelector('#lives');
+let levelUpdate = document.querySelector('#lvl');
+
 let A1 = document.getElementById('A1')
 let A2 = document.getElementById('A2')
 let A3 = document.getElementById('A3')
@@ -30,7 +34,7 @@ let C4 = document.getElementById('C4')
 // Default: Level 1
 const items = [
     {id: 'mole', chance: 1, class:'safe', image: "./Media/Title Mole.png"},
-    {id: 'bomb', chance: 0, class:'hazard'},
+    {id: 'bomb', chance: 0, class:'hazard', image: "Media/bomb.png"},
     {id: 'steve', chance: 0, class: 'safe', image: "./sprites/stevehuh.png"},
     {id: 'poop', chance: 0, class:'hazard'}, 
     {id: 'imposter', chance: 0, class:'hazard'},
@@ -86,6 +90,18 @@ function randomHole(holes) {
     return hole;
 }
 
+function placeItem(){
+    const itemChosen = Math.floor(Math.random() * items.length)
+    const itemID = items[itemChosen].id
+    const itemImage = items[itemChosen].image
+    
+    let hole = randomHole(holes);
+
+    //place 
+    
+
+}
+
 randomHole(holes);
 
 
@@ -103,8 +119,10 @@ randomHole(holes);
 
         if(item.class === 'hazard'){
             lives--;
+            livesUpdate.textContent = lives;
         }else if(item.class === 'safe'){
             score++;
+            scoreUpdate.textContent = score;
         }
         gameGrid.removeChild(clickedItem)
         
