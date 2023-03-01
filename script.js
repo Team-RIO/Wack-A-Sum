@@ -76,9 +76,9 @@ const items = [
 
 // Variables that update as the game progresses
 
-// let lives = 3; // keep track of lives
-// let level = 1; // keep track of level
-// let score = 0; // keep track of score
+let livesEl = document.getElementById('lives'); // keep track of lives
+let levelEl = document.getElementById('level'); // keep track of level
+let scoreEl = document.getElementById('score'); // keep track of score
 // let multiplier = 1;    => potential bonus feature 
 
 
@@ -193,14 +193,10 @@ gameGrid.addEventListener('click', updateGame);
 
 startPage.style.display = "none"
 // Game over screen
-// if(lives < 0){
 //     startPage.style.display = "none";
 //         // main.removeChild(document.querySelector("#startPage"))
 //         title.style.display = "none"
 //         playArea.style.display = "block";
-//         main.style.display = 'flex';
-//         main.style.justifyContent = 'center';
-
 // }
 // Restart game     => Event listener awaits 'click' on mole ID. When clicked, the player is returned to the game area and a new game begins 
 // function restart() {
