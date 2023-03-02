@@ -61,23 +61,28 @@ mole.src = './sprites/mole.png';
 ///////////////////////////////////////////////////////////////////////////
 
 
-// Default: Level 1 ~ "If yall wanna do this, try it out, ill leave it commented"
-// const items = [
-//     {id: 'mole', chance: 1, class:'safe', image: "./Media/mole.png"},
-//     {id: 'bomb', chance: 0, class:'hazard', image: "Media/bomb.png"},
-//     {id: 'steve', chance: 0, class: 'safe', image: "./sprites/steve.png"},
-// ];
+    // Music n Sound FX - Isaac
+const bgMusic = new Audio("./music/bonetrousle.mp3");
+bgMusic.loop = true;
+bgMusic.volume = .7;
 
+const endMusic = new Audio("./music/premonition.mp3");
+endMusic.loop = true;
+endMusic.volume = 1;
 
+const mainMusic = new Audio("./music/temmie.mp3");
+mainMusic.loop = true;
+mainMusic.volume = 1;
+// onload(mainMusic.play())
 
-// Variables that update as the game progresses
+// Variables that update as the game progresses - Raven
 
 const scoreUpdate = document.querySelector('#score');
 const livesUpdate = document.querySelector('#lives');
 const levelUpdate = document.querySelector('#lvl');
 const highScoreUpdate = document.querySelector('#topScore');
 
-// let multiplier = 1;    => potential bonus feature 
+// let multiplier = 1; => potential bonus feature 
 
 // Functions 
 
@@ -95,6 +100,8 @@ startMole.onclick = ( () => {
     main.style.display = 'flex';
     main.style.justifyContent = 'center';
     gameActive = true;
+    bgMusic.play();
+    mainMusic.pause()
 })
 
 tryAgain.onclick = ( () => {
@@ -109,6 +116,8 @@ tryAgain.onclick = ( () => {
     level = 0
     levelUpdate.innerText= level
     gameActive = true;
+    bgMusic.play();
+    endMusic.pause()
 })
 
 
@@ -189,6 +198,8 @@ setInterval(() => {
             gameActive = false;
             gameOverScreen.style.display = "flex";
             playArea.style.display = "none";
+            bgMusic.pause();
+            endMusic.play()
             if (bestScore < score) {
                 bestScore = score; 
                 highScoreUpdate.textContent = bestScore; 
