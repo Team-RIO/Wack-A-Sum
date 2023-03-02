@@ -48,13 +48,47 @@ const mole = document.createElement('img');
 mole.classList = "sprite";
 mole.src = './sprites/mole.png';
 
+const nic = document.createElement('img');
+nic.classList = "sprite";
+nic.src = './sprites/nic.png';
+
+const pb = document.createElement('img');
+pb.classList = "sprite";
+pb.src = './sprites/pb.png';
+
+const lau = document.createElement('img');
+lau.classList = "sprite";
+lau.src = './sprites/lau.png';
+
+const mat = document.createElement('img');
+mat.classList = "sprite";
+mat.src = './sprites/mat.png';
+
+const trump = document.createElement('img');
+trump.classList = "sprite";
+trump.src = './sprites/trump.png';
+
+const fire = document.createElement('img');
+fire.classList = "sprite";
+fire.src = './sprites/fire.gif';
+
+const amogus = document.createElement('img');
+amogus.classList = "sprite";
+amogus.src = './sprites/amogus.gif';
+
+const alien = document.createElement('img');
+alien.classList = "sprite";
+alien.src = './sprites/alien.png';
+
+
+
 ///////////////////////////////////////////////////////////////////////////
 
 // All possible items that will pop out of holes - Raven
 
 
-    const safe = [steve , mole]
-    const harm = [bomb]
+    const safe = [steve , mole , nic , pb , lau , mat , alien]
+    const harm = [bomb ,  fire , amogus]
     const selection = [...safe,...harm]
 
 
@@ -71,10 +105,14 @@ endMusic.loop = true;
 endMusic.volume = 1;
 
 const mainMusic = new Audio("./music/temmie.mp3");
+// const mainMusic = document.getElementById('pageMusic');
 mainMusic.loop = true;
 mainMusic.volume = 1;
-// onload(mainMusic.play())
-
+// mainMusic.addEventListener("canplaythrough", () => {
+//     mainMusic.play()
+// });
+// document.body.addEventListener('load', () => {mainMusic.play()});
+mainMusic.play()
 // Variables that update as the game progresses - Raven
 
 const scoreUpdate = document.querySelector('#score');
@@ -89,7 +127,7 @@ const highScoreUpdate = document.querySelector('#topScore');
 // Start screen  
 
 // Event listener awaits 'click' on mole ID. When clicked, the page is swapped to the game area - Isaac
-
+// body.addEventListener("load",()=>{mainMusic.play();})
 playArea.style.display = "none"; // Hides The Game Screen until The Game Begins. 
 let gameActive = false;
 
@@ -187,7 +225,9 @@ function sel() {
 
 
     let time = 2000; // Was to make the objects disappear by themselves at random times, but scrapped for simplicity, now simply makes stuff spawn faster as the game goes on. 
-
+setInterval(() =>{
+    time-=500
+}, 3000)
 
     // Summons the Moles - Group Effort
 setInterval(() => {
@@ -285,9 +325,8 @@ setInterval(() => {
 
                 // Increases the spawn frequency 
             
-            time > 100 ? time -= 50 : false
             updateLevel(score, levelUpdate);
         }
-}, time )
+}, 1000 )
 
 // ~Fin~

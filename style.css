@@ -174,3 +174,7 @@ p{
     color: white;
     font-size: xxx-large;
 }
+
+#pageMusic{
+    display:none;
+}
