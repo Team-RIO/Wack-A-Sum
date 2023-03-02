@@ -108,11 +108,12 @@ const mainMusic = new Audio("./music/temmie.mp3");
 // const mainMusic = document.getElementById('pageMusic');
 mainMusic.loop = true;
 mainMusic.volume = 1;
+mainMusic.muted = false;
 // mainMusic.addEventListener("canplaythrough", () => {
 //     mainMusic.play()
 // });
-// document.body.addEventListener('load', () => {mainMusic.play()});
-mainMusic.play()
+document.addEventListener('DOMContentLoaded', () => {mainMusic.play()});
+// mainMusic.play()
 // Variables that update as the game progresses - Raven
 
 const scoreUpdate = document.querySelector('#score');
@@ -302,7 +303,7 @@ setInterval(() => {
                 };
 
                     // Removes Safe Objects with Penalty
-                onDelay(3000, () => {
+                onDelay(2000, () => {
                     if(safe.includes(tempImg) && notHit){
                         // console.log('dang u missed that')
                         lives = lives.substring(2, lives.length);
@@ -312,7 +313,7 @@ setInterval(() => {
                 });
 
                     // Removes Harmful Objects with no Penalty
-                onDelay(3000, () => {
+                onDelay(2000, () => {
                     if(harm.includes(tempImg) && notHit){
                         // console.log('bullet dodged')
                         tempSlot.removeChild(tempImg);
