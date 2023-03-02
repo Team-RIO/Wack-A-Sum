@@ -198,6 +198,11 @@ setInterval(() => {
         const tempSlot = document.getElementById(hole)
         const tempImg = selection[item]
         tempImg.nodeType = 'button'
+
+        function updateLevel(score, levelUpdate) {
+            const level = Math.floor(score / 2000);
+            levelUpdate.innerText = level.toString();
+          }
         
         function placeItem() {
 
@@ -269,7 +274,7 @@ setInterval(() => {
             placeItem()
                 // Changes the spawn frequency 
             time-=5
-            score
+            updateLevel(score, levelUpdate);
         }
 }, 1000 )
 
