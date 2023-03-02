@@ -106,6 +106,8 @@ tryAgain.onclick = ( () => {
     livesUpdate.innerText = lives;
     score = 000;
     scoreUpdate.innerText = score
+    level = 0
+    levelUpdate.innerText= level
     gameActive = true;
 })
 
@@ -198,6 +200,11 @@ setInterval(() => {
         const tempSlot = document.getElementById(hole)
         const tempImg = selection[item]
         tempImg.nodeType = 'button'
+
+        function updateLevel(score, levelUpdate) {
+            const level = Math.floor(score / 1000);
+            levelUpdate.innerText = level.toString();
+          }
         
         function placeItem() {
 
@@ -268,6 +275,7 @@ setInterval(() => {
                 // Increases the spawn frequency 
             
             time > 100 ? time -= 50 : false
+            updateLevel(score, levelUpdate);
         }
 }, time )
 
