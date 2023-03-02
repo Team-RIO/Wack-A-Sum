@@ -267,7 +267,6 @@ setInterval(() => {
 
                 // Increases the spawn frequency 
             time-=5
-            score
         }
 }, 1000 )
 
