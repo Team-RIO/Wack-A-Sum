@@ -115,9 +115,10 @@ startMole.onclick = ( () => {
 //one for hole, one for mole
 //place item in random hole
 let lastHole; 
-// setInterval(popUp(),1)
+
 function popUp(){
 
+    // Random hole generation that avoids duplicates - Raven
     function randomHole(holes) {
         const rand = Math.floor(Math.random() * holes.length);
         const hole = holes[rand];
@@ -137,16 +138,22 @@ function popUp(){
         // iterate through the items and find the one that corresponds to the random number
         let cumulativeProbability = 0;
         for (let i = 0; i < items.length; i++) {
-        cumulativeProbability += items[i].chance;
-        if (rand < cumulativeProbability) {
-            return items[i];
-        }
+            cumulativeProbability += items[i].chance;
+            if (rand < cumulativeProbability) {
+                return items[i];
+            }
         }
     }
+    
+    // Items appear for random durations - Raven
+    function randomTime(min, max) {
+        return Math.round(Math.random() * (max - min) + min);
+    } 
 
     function placeItem(holes, items) {
         const hole = randomHole(holes);
         const item = randomItem(items);
+        const time = randomTime(500, 2000); 
     
         // check if the item is a hazard
         if (item.class === 'hazard') {
@@ -224,7 +231,7 @@ startPage.style.display = "none"
 
 //-----------------------------------------
 
-placeItem()
+// placeItem()
 
 
 
