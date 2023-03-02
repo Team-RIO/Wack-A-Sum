@@ -75,6 +75,7 @@ mole.src = './sprites/mole.png';
 const scoreUpdate = document.querySelector('#score');
 const livesUpdate = document.querySelector('#lives');
 const levelUpdate = document.querySelector('#lvl');
+const highScoreUpdate = document.querySelector('#topScore');
 
 // let multiplier = 1;    => potential bonus feature 
 
@@ -101,26 +102,22 @@ tryAgain.onclick = ( () => {
     playArea.style.display = "flex";
     main.style.display = 'flex';
     main.style.justifyContent = 'center';
+    lives = '💖💖💖'
+    livesUpdate.innerText = lives;
     gameActive = true;
 })
 
 
 let score = 000;
+let bestScore = 000;
 let lives = '💖💖💖';
 livesUpdate.innerText = lives   
+scoreUpdate.innerText = score
 let lastHole; 
-    // document.querySelector(".hole").style.height = '100px'
 
 
 const cellList = ['A1', 'A2', 'A3', 'A4', 'B1', 'B2', 'B3', 'B4', 'C1', 'C2', 'C3', 'C4'];
 
-//two random functions
-//one for hole, one for mole
-//place item in random hole
-
-function randomTime(min, max){
-    return Math.round(Math.random() * (max - min) + min);
-}
 
 
 // Random hole Selector that avoids duplicates - Raven
@@ -136,21 +133,21 @@ function randomHole(holes) {
     return hole;
 }
 
-// Get The Random Item
-function randomItem(rand) {
-    let total = 0;
-    for (let i = 0; i < items.length; i++){
-        total += items[i].chance;
-    } 
-    for (let i = 0; i < items.length; i++) {
-        let item = items[i];
-        let rand = Math.floor(Math.random() * total);
-        if (rand < item.chance) {
-            return item.id;
-        }
-        rand -= item.chance;
-    }
-}
+    // Get The Random Item - Raven 
+// function randomItem(rand) {
+//     let total = 0;
+//     for (let i = 0; i < items.length; i++){
+//         total += items[i].chance;
+//     } 
+//     for (let i = 0; i < items.length; i++) {
+//         let item = items[i];
+//         let rand = Math.floor(Math.random() * total);
+//         if (rand < item.chance) {
+//             return item.id;
+//         }
+//         rand -= item.chance;
+//     }
+// }
 
     // Isaac: "1st Attempt to Select Items randomly didnt go well but if yall wanna do it... go ahead" - Raven
 // function randomItem(arr) { 
@@ -176,22 +173,23 @@ function sel() {
 }
 
 
-    let time; // Was to make the objects disappear by themselves at random times, but scrapped for simplicity. 
+    let time; // Was to make the objects disappear by themselves at random times, but scrapped for simplicity, now simply makes stuff spawn faster as the game goes on. 
 
-    // time = randomTime(1000, 3000)
 
     // Summons the Moles - Group Effort
 setInterval(() => {
-    if(lives.length === 0){
-        gameActive = false;
-        gameOverScreen.style.display = "flex";
-            playArea.style.display = "none";
-            score = 0
-            scoreUpdate.innerText = score
-            lives = '💖💖💖'
-            livesUpdate.innerText = lives;
-    }
     if(gameActive){ 
+
+            // Transfers to Game over screen if you run out of lives
+        if(lives.length === 0){
+            gameActive = false;
+            gameOverScreen.style.display = "flex";
+            playArea.style.display = "none";
+            if (bestScore < score) {
+                bestScore = score; 
+                highScoreUpdate.textContent = bestScore; 
+            }
+        }
 // Gets Random Hole and Random Item from previous functions
         const hole = randomHole(cellList)
         const item = sel(selection)
@@ -208,24 +206,24 @@ setInterval(() => {
                 
                 // Hit Functions
 
-                            // Will be used later to check if you hit a harmful item 
-                    function hitSafe(){
-                        score += 100
-                        scoreUpdate.innerText = score
-                        notHit = false  
-                        tempSlot.removeChild(tempImg) 
-                        return;
-                    }
-   
-                        // Will be used later to check if you hit a harmful item 
-                    function hitHarm(){
-                        lives = lives.substring(2, lives.length)   
-                        livesUpdate.innerText = lives   
-                        notHit = false
-                        tempSlot.removeChild(tempImg)
-                        return;    
-                    }
-                 
+                    // Will be used later to check if you hit a harmful item 
+                function hitSafe(){
+                    score += 100
+                    scoreUpdate.innerText = score
+                    notHit = false  
+                    tempSlot.removeChild(tempImg) 
+                    return;
+                }
+
+                    // Will be used later to check if you hit a harmful item 
+                function hitHarm(){
+                    lives = lives.substring(2, lives.length)   
+                    livesUpdate.innerText = lives   
+                    notHit = false
+                    tempSlot.removeChild(tempImg)
+                    return;    
+                }
+                
 
                     // Checks to see if the item you hit is harmful or safe.
                 tempImg.onclick = () => {
@@ -234,7 +232,7 @@ setInterval(() => {
 
                     safe.includes(tempImg) ? hitSafe() : false ;
                 }
-                
+            
                     // Makes Image Pop Up
                 tempSlot.append(tempImg);
 
@@ -243,11 +241,10 @@ setInterval(() => {
                     setTimeout(action, delay);
                 };
 
-                // Removes Safe Objects with Penalty
-
+                    // Removes Safe Objects with Penalty
                 onDelay(3000, () => {
                     if(safe.includes(tempImg) && notHit){
-                        console.log('dang u missed that')
+                        // console.log('dang u missed that')
                         lives = lives.substring(2, lives.length);
                         livesUpdate.innerText = lives;
                         tempSlot.removeChild(tempImg);
@@ -255,41 +252,21 @@ setInterval(() => {
                 });
 
                     // Removes Harmful Objects with no Penalty
-
                 onDelay(3000, () => {
                     if(harm.includes(tempImg) && notHit){
-                        console.log('bullet dodged')
+                        // console.log('bullet dodged')
                         tempSlot.removeChild(tempImg);
                     }
                 });
-
             }
         }
 
             placeItem()
-                // Changes the spawn frequency 
+
+                // Increases the spawn frequency 
             time-=5
             score
         }
 }, 1000 )
 
-// Game over screen
-            //put in interval
-
-// }
-
-// Restart game     => Event listener awaits 'click' on mole ID. When clicked, the player is returned to the game area and a new game begins 
-// function restart() {
-//     // code
-// }
-
-
-
-// End Screen
-
-//-----------------------------------------
-
-// placeItem()
-
-
-
+// ~Fin~
