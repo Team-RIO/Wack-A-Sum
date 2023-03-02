@@ -104,6 +104,8 @@ tryAgain.onclick = ( () => {
     main.style.justifyContent = 'center';
     lives = '💖💖💖'
     livesUpdate.innerText = lives;
+    score = 000;
+    scoreUpdate.innerText = score
     gameActive = true;
 })
 
