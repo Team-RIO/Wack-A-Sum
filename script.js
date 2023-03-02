@@ -175,7 +175,7 @@ function sel() {
 }
 
 
-    let time; // Was to make the objects disappear by themselves at random times, but scrapped for simplicity, now simply makes stuff spawn faster as the game goes on. 
+    let time = 2000; // Was to make the objects disappear by themselves at random times, but scrapped for simplicity, now simply makes stuff spawn faster as the game goes on. 
 
 
     // Summons the Moles - Group Effort
@@ -266,8 +266,9 @@ setInterval(() => {
             placeItem()
 
                 // Increases the spawn frequency 
-            time-=5
+            
+            time > 100 ? time -= 50 : false
         }
-}, 1000 )
+}, time )
 
 // ~Fin~
