@@ -1,5 +1,5 @@
 /*
-Feel free to rename or alter anything as needed, I know there's some things missing (i.e. querySelectors)
+Feel free to rename or alter anything as needed, I know there's some things missing (i.e. querySelectors) ~ Raven
  */
 const main = document.querySelector('main')
 const startPage = document.getElementById('#startPage')
@@ -7,6 +7,7 @@ const playArea = document.querySelector('#playArea')
 const gameGrid = document.getElementById('gameGrid')
 const holes = document.querySelector('.hole')
 const startMole = document.querySelector('#startMole')
+const tryAgain = document.querySelector('#tryAgain')
 const title = document.getElementById("title")
 const gameOverScreen = document.getElementById("gameOverScreen")
 const livesStat = document.getElementById("lives")
@@ -14,10 +15,6 @@ const livesStat = document.getElementById("lives")
 ///////////////////////////////////////////////////////////////////////////
 
     // Hole Declarations - O'Shaun
-
-const scoreUpdate = document.querySelector('#score');
-const livesUpdate = document.querySelector('#lives');
-const levelUpdate = document.querySelector('#lvl');
 
 const A1 = document.getElementById('A1')
 const A2 = document.getElementById('A2')
@@ -53,173 +50,234 @@ mole.src = './sprites/mole.png';
 
 ///////////////////////////////////////////////////////////////////////////
 
+// All possible items that will pop out of holes - Raven
 
-
-
-
-// Elements Array 
 
     const safe = [steve , mole]
     const harm = [bomb]
-    const selection = []
+    const selection = [...safe,...harm]
+
+
 ///////////////////////////////////////////////////////////////////////////
 
 
-// All possible items that will pop out of holes
-// Default: Level 1
-const items = [
-    {id: 'mole', chance: 1, class:'safe', image: "./Media/mole.png"},
-    {id: 'bomb', chance: 0, class:'hazard', image: "Media/bomb.png"},
-    {id: 'steve', chance: 0, class: 'safe', image: "./sprites/steve.png"},
-];
+// Default: Level 1 ~ "If yall wanna do this, try it out, ill leave it commented"
+// const items = [
+//     {id: 'mole', chance: 1, class:'safe', image: "./Media/mole.png"},
+//     {id: 'bomb', chance: 0, class:'hazard', image: "Media/bomb.png"},
+//     {id: 'steve', chance: 0, class: 'safe', image: "./sprites/steve.png"},
+// ];
+
 
 
 // Variables that update as the game progresses
 
-// let lives = 3; // keep track of lives
-// let level = 1; // keep track of level
-// let score = 0; // keep track of score
+const scoreUpdate = document.querySelector('#score');
+const livesUpdate = document.querySelector('#lives');
+const levelUpdate = document.querySelector('#lvl');
+
 // let multiplier = 1;    => potential bonus feature 
-
-
-// We wanna create images with the type of "button" and when they are clicked on, they add to tht score
-
-
 
 // Functions 
 
 // Start screen  
 
-// Event listener awaits 'click' on mole ID. When clicked, the page is swapped to the game area 
+// Event listener awaits 'click' on mole ID. When clicked, the page is swapped to the game area - Isaac
 
-// gameOverScreen.style.display = "none" // Hides The Game Over Screen 
 playArea.style.display = "none"; // Hides The Game Screen until The Game Begins. 
-
+let gameActive = false;
 
 startMole.onclick = ( () => {
     main.removeChild(document.querySelector("#startPage"))
     title.style.display = "none"
     playArea.style.display = "flex";
-    // gameOverScreen.style.display = "flex";
     main.style.display = 'flex';
     main.style.justifyContent = 'center';
+    gameActive = true;
+})
+
+tryAgain.onclick = ( () => {
+    gameOverScreen.style.display = "none";
+    playArea.style.display = "flex";
+    main.style.display = 'flex';
+    main.style.justifyContent = 'center';
+    gameActive = true;
 })
 
 
+let score = 000;
+let lives = '💖💖💖';
+livesUpdate.innerText = lives   
+let lastHole; 
     // document.querySelector(".hole").style.height = '100px'
 
 
-// const holes = ['A1', 'A2', 'A3', 'A4', 'B1', 'B2', 'B3', 'B4', 'C1', 'C2', 'C3', 'C4'];
+const cellList = ['A1', 'A2', 'A3', 'A4', 'B1', 'B2', 'B3', 'B4', 'C1', 'C2', 'C3', 'C4'];
 
 //two random functions
 //one for hole, one for mole
 //place item in random hole
-let lastHole; 
 
-function popUp(){
+function randomTime(min, max){
+    return Math.round(Math.random() * (max - min) + min);
+}
 
-    // Random hole generation that avoids duplicates - Raven
-    function randomHole(holes) {
-        const rand = Math.floor(Math.random() * holes.length);
-        const hole = holes[rand];
-        if (hole === lastHole) {
-            console.log('getting new hole');
-            return randomHole(holes);
-        }
-        lastHole = hole;
-        return hole;
+
+// Random hole Selector that avoids duplicates - Raven
+
+function randomHole(holes) {
+    const rand = Math.floor(Math.random() * holes.length);
+    const hole = holes[rand];
+    if (hole === lastHole) {
+        // console.log('getting new hole');
+        return randomHole(holes);
     }
+    lastHole = hole;
+    return hole;
+}
 
-    function randomItem(items) {
-        // calculate the total probability of all items
-        const totalProbability = items.reduce((total, item) => total + item.chance, 0);
-        // generate a random number between 0 and the total probability
-        const rand = Math.random() * totalProbability;
-        // iterate through the items and find the one that corresponds to the random number
-        let cumulativeProbability = 0;
-        for (let i = 0; i < items.length; i++) {
-            cumulativeProbability += items[i].chance;
-            if (rand < cumulativeProbability) {
-                return items[i];
-            }
-        }
-    }
-    
-    // Items appear for random durations - Raven
-    function randomTime(min, max) {
-        return Math.round(Math.random() * (max - min) + min);
+// Get The Random Item
+function randomItem(rand) {
+    let total = 0;
+    for (let i = 0; i < items.length; i++){
+        total += items[i].chance;
     } 
-
-    function placeItem(holes, items) {
-        const hole = randomHole(holes);
-        const item = randomItem(items);
-        const time = randomTime(500, 2000); 
-    
-        // check if the item is a hazard
-        if (item.class === 'hazard') {
-        hole.classList.add('hole-hazard');
+    for (let i = 0; i < items.length; i++) {
+        let item = items[i];
+        let rand = Math.floor(Math.random() * total);
+        if (rand < item.chance) {
+            return item.id;
         }
-    
-        // append item image to the hole
-        const image = new Image();
-        image.src = item.image;
-        hole.appendChild(image);
+        rand -= item.chance;
     }
+}
 
-    // Game area 
-    // Event listener needed for 'click' => effect changes based on the element (hazard or safe)
-    // This function should contain conditions for how the item clicked affects lives/score updates
+    // Isaac: "1st Attempt to Select Items randomly didnt go well but if yall wanna do it... go ahead" - Raven
+// function randomItem(arr) { 
+//     // calculate the total probability of all items
+//     const totalProbability = arr.reduce((total, item) => total + item.chance, 0);
+//     // generate a random number between 0 and the total probability
+//     const rand = Math.random() * totalProbability;
+//     // iterate through the items and find the one that corresponds to the random number
+//     let cumulativeProbability = 0;
+//     for (let i = 0; i < arr.length; i++) {
+//         cumulativeProbability += arr[i].chance;
+//         if (rand < cumulativeProbability) {
+//             console.log(arr[i])
+//             return arr[i];
+//         }
+//     }
+// }    
 
-    //make updateGame to make it releveant to our code, append  them
-        let score = 0;
-        let lives = 3;
+function sel() {
+    const count = selection.length
+    const rand = Math.floor(Math.random() * count)
+    return rand
+}
 
-        function updateGame(event, items) {
-            const clickedItem = event.target;
-            const itemId = clickedItem.parentNode.id;
-            const item = items.find(item => item.id === itemId);
 
-            if (!item) {
-                // clicked outside of a mole hole
-                return;
-            }
+    let time; // Was to make the objects disappear by themselves at random times, but scrapped for simplicity. 
 
-            if (item.class === 'hazard') {
-                lives--;
-                livesUpdate.textContent = lives;
-            } else if (item.class === 'safe') {
-                score++;
-                scoreUpdate.textContent = score;
-            }
+    // time = randomTime(1000, 3000)
 
-            const moleHole = clickedItem.parentNode;
-            moleHole.removeChild(clickedItem);
-
-            if (lives < 0) {
-                playArea.style.display = 'none';
-                gameOverScreen.style.display = 'flex';
-            }
+    // Summons the Moles - Group Effort
+setInterval(() => {
+    if(lives.length === 0){
+        gameActive = false;
+        gameOverScreen.style.display = "flex";
+            playArea.style.display = "none";
+            score = 0
+            scoreUpdate.innerText = score
+            lives = '💖💖💖'
+            livesUpdate.innerText = lives;
+    }
+    if(gameActive){ 
+// Gets Random Hole and Random Item from previous functions
+        const hole = randomHole(cellList)
+        const item = sel(selection)
+        const tempSlot = document.getElementById(hole)
+        const tempImg = selection[item]
+        tempImg.nodeType = 'button'
         
-    };
-};
-// if(lives === 3){
-//     playArea.style.display = "none";
-//     gameOverScreen.style.display = "flex";
-// }
+        function placeItem() {
 
-// gameGrid.addEventListener('click', updateGame);
+            let notHit = true
 
-startPage.style.display = "none"
+                // Makes sure a singular slot cannot have 2 Items by only running if the slot is empty
+            if(!document.getElementById(hole).childNodes.length){
+                
+                // Hit Functions
+
+                            // Will be used later to check if you hit a harmful item 
+                    function hitSafe(){
+                        score += 100
+                        scoreUpdate.innerText = score
+                        notHit = false  
+                        tempSlot.removeChild(tempImg) 
+                        return;
+                    }
+   
+                        // Will be used later to check if you hit a harmful item 
+                    function hitHarm(){
+                        lives = lives.substring(2, lives.length)   
+                        livesUpdate.innerText = lives   
+                        notHit = false
+                        tempSlot.removeChild(tempImg)
+                        return;    
+                    }
+                 
+
+                    // Checks to see if the item you hit is harmful or safe.
+                tempImg.onclick = () => {
+
+                    harm.includes(tempImg) ? hitHarm() : false ;       
+
+                    safe.includes(tempImg) ? hitSafe() : false ;
+                }
+                
+                    // Makes Image Pop Up
+                tempSlot.append(tempImg);
+
+                    // This declaration allows us to have sprites delete themselves after an elapsed time
+                const onDelay = (delay, action) => {
+                    setTimeout(action, delay);
+                };
+
+                // Removes Safe Objects with Penalty
+
+                onDelay(3000, () => {
+                    if(safe.includes(tempImg) && notHit){
+                        console.log('dang u missed that')
+                        lives = lives.substring(2, lives.length);
+                        livesUpdate.innerText = lives;
+                        tempSlot.removeChild(tempImg);
+                    }
+                });
+
+                    // Removes Harmful Objects with no Penalty
+
+                onDelay(3000, () => {
+                    if(harm.includes(tempImg) && notHit){
+                        console.log('bullet dodged')
+                        tempSlot.removeChild(tempImg);
+                    }
+                });
+
+            }
+        }
+
+            placeItem()
+                // Changes the spawn frequency 
+            time-=5
+            score
+        }
+}, 1000 )
+
 // Game over screen
-// if(lives < 0){
-//     startPage.style.display = "none";
-//         // main.removeChild(document.querySelector("#startPage"))
-//         title.style.display = "none"
-//         playArea.style.display = "block";
-//         main.style.display = 'flex';
-//         main.style.justifyContent = 'center';
+            //put in interval
 
 // }
+
 // Restart game     => Event listener awaits 'click' on mole ID. When clicked, the player is returned to the game area and a new game begins 
 // function restart() {
 //     // code

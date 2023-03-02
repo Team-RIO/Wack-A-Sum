@@ -99,7 +99,12 @@ img {
     display: flex;
     border: rgb(177, 175, 175) 5px solid;
     border-radius: 5%;
+    min-width: 70px;
+    justify-content: center;
 }
+
+
+
 
 p{
     margin: 0%;
@@ -112,7 +117,7 @@ p{
 
 #rightStat{
     display: flex;
-    width: 200px;
+    width: 250px;
     justify-content: space-between;
 }
 
@@ -139,10 +144,14 @@ p{
 
 .hole:hover{
     backdrop-filter: grayscale(20%);
-    background: url(./Media/bomb.png);
-    /* background-size: 10%; */
-    /* background-repeat: no-repeat; */
-    /* height: 5rem; */
+    background: url(./Media/hole.png);
+    background-size: 100%;
+    background-repeat: no-repeat;
+    background-blend-mode: ;
+    background-position: bottom;
+    height: 5rem;
+    align-self: baseline;
+
 }
 
 #gameOverScreen{
