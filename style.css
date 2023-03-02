@@ -99,7 +99,12 @@ img {
     display: flex;
     border: rgb(177, 175, 175) 5px solid;
     border-radius: 5%;
+    min-width: 70px;
+    justify-content: center;
 }
+
+
+
 
 p{
     margin: 0%;
@@ -112,7 +117,7 @@ p{
 
 #rightStat{
     display: flex;
-    width: 200px;
+    width: 250px;
     justify-content: space-between;
 }
 
