@@ -241,6 +241,7 @@ setInterval(() => {
             playArea.style.display = "none";
             bgMusic.pause();
             endMusic.play()
+            holes.removeChildren(tempImg)
             if (bestScore < score) {
                 bestScore = score; 
                 highScoreUpdate.textContent = bestScore; 
