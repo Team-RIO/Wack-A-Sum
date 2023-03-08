@@ -236,16 +236,15 @@ setInterval(() => {
 
             // Transfers to Game over screen if you run out of lives
         if(lives.length === 0){
+            if (bestScore < score) {
+                bestScore = score; 
+                highScoreUpdate.textContent = bestScore; 
+            }
             gameActive = false;
             gameOverScreen.style.display = "flex";
             playArea.style.display = "none";
             bgMusic.pause();
             endMusic.play()
-            holes.removeChildren(tempImg)
-            if (bestScore < score) {
-                bestScore = score; 
-                highScoreUpdate.textContent = bestScore; 
-            }
         }
 // Gets Random Hole and Random Item from previous functions
         const hole = randomHole(cellList)
@@ -260,7 +259,7 @@ setInterval(() => {
           }
         
         function placeItem() {
-
+                // A var to see if items were whacked or not
             let notHit = true
 
                 // Makes sure a singular slot cannot have 2 Items by only running if the slot is empty
